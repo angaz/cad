@@ -1,4 +1,4 @@
-$fn = 32;
+$fn = 64;
 
 n_discs=9;
 disc_gap = 5;
@@ -51,7 +51,7 @@ module carrier() {
 		for (i = [0:n_discs-1]) {
 			translate([0, 0, -(height/2-disc_gap)+(i*disc_gap)])
 				union() {
-					cylinder(d=disc_diameter+tollerance, h=disc_thickness+0.5, center=true);
+					cylinder(d=disc_diameter+1, h=disc_thickness+0.5, center=true);
 					
 					translate([0, disc_diameter/2, 0])
 						cube([disc_diameter+tollerance, disc_diameter, disc_thickness+0.5], center=true);
@@ -62,8 +62,9 @@ module carrier() {
 
 module separator() {
 	h = disc_gap - disc_thickness;
+
 	difference() {
-		cylinder(h=h, d=spline_outer+tollerance+5);
+		cylinder(h=h, d=disc_diameter*0.85);
 		cylinder(h=h, d=spline_outer+tollerance);
 	}
 }
